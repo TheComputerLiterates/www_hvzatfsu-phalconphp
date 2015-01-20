@@ -1,0 +1,40 @@
+<h1>Register</h1>
+
+<table>
+<?php echo $this->tag->form('session/register') ?>
+  <input type="hidden" name="<?php echo $this->security->getTokenKey() ?>"value="<?php echo $this->security->getToken() ?>"/>
+  <tr>
+    <td><label for="firstname">First Name</label></td>
+    <td><?php echo $this->tag->textField(array("firstname", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td><label for="lastname">Last Name</label></td>
+    <td><?php echo $this->tag->textField(array("lastname", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td><label for="email">E-mail</label></td>
+    <td><?php echo $this->tag->textField(array("email", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td><label for="emailRetype">Confirm E-mail</label></td>
+    <td><?php echo $this->tag->textField(array("emailRetype", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td><label for="username">Username</label></td>
+    <td><?php echo $this->tag->textField(array("username", "size" => "40")) ?></td>
+  </tr> 
+  <tr>
+    <td><label for="password">Password</label></td>
+    <td><?php echo $this->tag->passwordField(array("password", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td><label for="passwordRetype">Confirm Password</label></td>
+    <td><?php echo $this->tag->passwordField(array("passwordRetype", "size" => "40")) ?></td>
+  </tr>
+  <tr>
+    <td colspan="2"><center><?php echo $this->tag->submitButton(array('Register')) ?></center></td>
+  </tr>
+  
+
+</form>
+</table>

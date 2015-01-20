@@ -1,0 +1,1 @@
+{{ link_to('session/index',"Click here to login") }}

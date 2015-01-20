@@ -1,0 +1,99 @@
+<!-- commenting out for working on bootstrap menu bar
+
+  <div id="topBar">
+    <span> {{ link_to("index",image("img/homeBtn.png", "alt":"Home")) }} </span>
+    <ul>
+-->
+    <!-- TODO: make this work with mobile and login dependent -->
+<!--
+    <li>{{ link_to("admin/index","Admin") }}</li> | 
+    <li>{{ link_to("session/register","Register") }}</li> | 
+    <li>{{ link_to("forums","Forums") }}</li> | 
+    <li>{{ link_to("info/rules","Rules") }}</li> | 
+    <li>{{ link_to("info/about","About") }}</li> | 
+    <li>{{ link_to("session/login","Login") }}</li> | 
+    <li>{{ link_to("session/logout","Logout") }}</li> |
+    <li>{{ link_to("profile","Profile") }}</li>
+  </ul>
+</div>
+-->
+
+<!-- New nav bar: responsive-->
+<header class="navbar navbar-inverse navbar-static" role="banner">
+  <div class="container">
+
+    <!-- Things that will be displayed whetehr collapsed or not-->
+    <div class="navbar-header">
+
+      <!-- Button for collapse-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      {{ link_to("index",image("img/homeBtn.png", "alt":"Home", "class":"navbar-brand")) }}
+      {{ link_to("https://www.facebook.com/hvzatfsu",image("img/FB-f-Logo__blue_29.png", "alt":"Facebook", "class":"navbar-brand")) }}
+    </div>
+
+    <!-- Items that will be collapsed (hidden) when on mobile -->
+    <nav class="collapse navbar-collapse" id="main-navbar-collapse" role="navigation" >
+
+
+    <!-- Will be replaces with elements.getHeaderMenu() -->
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="navbar-text">Hello
+            <?php
+            $auth = $this->session->get('auth');
+            if($auth) {
+              $str_id = User::userIdToString($auth['userId'],true);
+              echo  $auth['username'];
+            } else {
+              echo "Guest";
+            }
+            echo "!";
+          ?>
+        </li>
+
+        <li>{{ link_to("index","Home") }}</li>
+
+        <li>{{ link_to("info/about","About") }}</li>
+        <li>{{ link_to("info/rules","Rules") }}</li>
+        <li>{{ link_to("forums","Forums") }}</li>
+        
+
+        <!-- This section handles the navigation available to certain users -->
+        <?php if(!$auth){ ?>
+          <li>{{ link_to("session/register","Register") }}</li>
+          <li>{{ link_to("session/login","Login") }}</li>
+
+        <?php } else {
+          if($auth['role'] == 6) { ?>
+            <li>{{ link_to("admin/index","Admin") }}</li>
+
+          <?php } else if($auth['role'] == 3) { ?>
+            <li>{{ link_to("management/index","Mod Tools") }}</li>
+
+          <?php } ?>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>
+          
+            <ul class="dropdown-menu" role="menu">
+              <li>{{ link_to("profile", "My Profile")}}</li>
+              <li>{{ link_to("session/logout","Logout") }}</li>
+            </ul>
+          </li> 
+          
+        <?php } ?>
+        <!-- End of secion-->
+
+        
+      </ul>
+
+    </nav>
+  </div>
+</header>
+<!-- End new nav bar -->
